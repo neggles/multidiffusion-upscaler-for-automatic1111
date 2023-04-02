@@ -1,19 +1,12 @@
-import sys
-from typing import *
+from types import ModuleType
+from typing import DefaultDict, Dict, List, Union
+
 from torch import Tensor
 
-from gradio.components import Component
-
-from k_diffusion.external import CompVisDenoiser
-from ldm.models.diffusion.ddpm import LatentDiffusion
-
-from modules.processing import StableDiffusionProcessing, StableDiffusionProcessingImg2Img
-from modules.prompt_parser import MulticondLearnedConditioning, ScheduledPromptConditioning
 from modules.extra_networks import ExtraNetworkParams
-from modules.sd_samplers_kdiffusion import KDiffusionSampler, CFGDenoiser
+from modules.prompt_parser import MulticondLearnedConditioning, ScheduledPromptConditioning
 from modules.sd_samplers_compvis import VanillaStableDiffusionSampler
-
-ModuleType = type(sys)
+from modules.sd_samplers_kdiffusion import KDiffusionSampler
 
 Sampler = Union[KDiffusionSampler, VanillaStableDiffusionSampler]
 Cond = MulticondLearnedConditioning
@@ -23,3 +16,15 @@ ExtraNetworkData = DefaultDict[str, List[ExtraNetworkParams]]
 # 'c_crossattn': Tensor    # prompt cond
 # 'c_concat':    Tensor    # latent mask
 CondDict = Dict[str, Tensor]
+
+__all__ = [
+    "ModuleType",
+    "Sampler",
+    "Cond",
+    "Uncond",
+    "ExtraNetworkData",
+    "CondDict",
+    "MulticondLearnedConditioning",
+    "ExtraNetworkParams",
+    "ScheduledPromptConditioning",
+]
